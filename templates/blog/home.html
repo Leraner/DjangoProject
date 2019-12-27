@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+    {% for category in categories %}
+        <p><a href="{% url 'category' category.slug %}">{{ category.name }}</a></p>
+    {% endfor %}
+    <hr>
+    {% for post in posts %}
+        <p><a href="{% url 'post' post.slug %}">{{ post.title }}</a></p>
+    {% endfor %}
+</body>
+</html>
