@@ -10,7 +10,11 @@
     {% endfor %}
     <hr>
     {% for post in posts %}
-        <p><a href="{% url 'post' post.slug %}">{{ post.title }}</a></p>
+        <p>{{ post.title }}</p>
+        <p>{{ post.mini_text }}</p>
+        <p>{{ post.text }}</p>
+         <p>{{ post.create_data }}</p>
+
     {% endfor %}
 </body>
 </html>
