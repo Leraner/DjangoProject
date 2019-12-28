@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 from django.utils import timezone
 from mptt.models import MPTTModel
 from mptt.fields import TreeForeignKey
@@ -59,7 +60,6 @@ class Post(models.Model):
     title = models.CharField('Заголовок', max_length=250)
     mini_text = models.TextField('Краткое содержание', max_length=5000)
     text = models.TextField('Текст', max_length=10000000)
-    create_data = models.DateTimeField('Дата создания', auto_now_add=True)
     subtitle = models.TextField('Под заголовок', max_length=500, blank=True, null=True)
     slug = models.SlugField('url', max_length=100, unique=True)
     tags = models.ManyToManyField(Tag, verbose_name='Тэг', blank=True)
@@ -88,12 +88,15 @@ class Post(models.Model):
     status = models.BooleanField('Для зарегестрированных', default=False)
     sort = models.PositiveIntegerField('Порядок', default=0)
 
-    def __str__(self):
-        return self.title
-
     class Meta:
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('detail_post', kwargs={'category': self.category.slug, 'post_slug': self.slug})
 
 
 class Comment(models.Model):
