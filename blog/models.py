@@ -82,7 +82,7 @@ class Post(models.Model):
         blank=True,
         null=True
     )
-    template = models.CharField('Шаблон', max_length=500, default='news/post_detail.html')
+    template = models.CharField('Шаблон', max_length=500, default='blog/post_detail.html')
     published = models.BooleanField('Отображать?', default=True)
     viewed = models.PositiveIntegerField('Просмотрено', default=0)
     status = models.BooleanField('Для зарегестрированных', default=False)
@@ -98,6 +98,12 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('detail_post', kwargs={'category': self.category.slug, 'post_slug': self.slug})
 
+    def get_comments_count(self):
+        return self.comments.count()
+
+    def get_category_template(self):
+        return self.category.template
+
 
 class Comment(models.Model):
     """Модель комментария"""
@@ -106,10 +112,15 @@ class Comment(models.Model):
         verbose_name='Автор',
         on_delete=models.CASCADE,
     )
-    post = models.ForeignKey(Post, verbose_name='Статья', on_delete=models.CASCADE)
+    post = models.ForeignKey(
+        Post,
+        verbose_name='Статья',
+        on_delete=models.CASCADE,
+        related_name='comments'
+    )
     text = models.TextField('Текст')
     create_data = models.DateTimeField('Дата создания', auto_now_add=True)
-    slug = models.SlugField('url', max_length=100, unique=True)
+    # slug = models.SlugField('url', max_length=100, unique=True)
     moderation = models.BooleanField(default=True)
 
     def __str__(self):
