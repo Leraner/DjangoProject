@@ -20,6 +20,16 @@
         {% endfor %}
     <hr>
     <h4>Комментарии</h4>
+    {% if user.is_authenticated%}
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Отправить</button>
+        </form>
+    {% else %}
+        <p> Чтобы оставить комментарий войдите на сайт </p>
+    {% endif %}
+    <hr>
 <!--    comment_set всё равно идёт запрос в базу данных-->
 <!--    _set нужен чтобы вызвать метод all-->
     <p>Кооментариев - {{ post.get_comments_count }}<br></p>
