@@ -24,7 +24,7 @@ class Category(MPTTModel):
     name = models.CharField('Имя', max_length=100)
     slug = models.SlugField('url', max_length=100)
     # default='' - позволяет не удалять миграции
-    description = models.TextField('Опимание', max_length=1000, default='', blank=True)
+    description = models.TextField('Описание', max_length=1000, default='', blank=True)
     # Подкатегории, => наследуется от MPTTModel
     parent = TreeForeignKey(
         'self',
@@ -39,6 +39,9 @@ class Category(MPTTModel):
     published = models.BooleanField('Отображать?', default=True)
     paginated = models.PositiveIntegerField('Кол-во новостей на странице', default=5)
     sort = models.PositiveIntegerField('Порядок', default=0)
+
+    def get_absolute_url(self):
+        return reverse('category', kwargs={'category_slug': self.slug})
 
     def __str__(self):
         return self.name
@@ -91,6 +94,8 @@ class Post(models.Model):
     class Meta:
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
+        # Сортировака по дате публикации
+        ordering = ['-published_date']
 
     def __str__(self):
         return self.title
@@ -129,3 +134,5 @@ class Comment(models.Model):
     class Meta:
         verbose_name = 'Комментарий'
         verbose_name_plural = 'Комментарии'
+        # Сортировака по дате публикации
+        ordering = ['-create_data']

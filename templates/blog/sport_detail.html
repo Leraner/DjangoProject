@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load blog_tags %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,9 +7,7 @@
 </head>
 <body>
     <h1>Sport</h1>
-    {% for category in categories %}
-        <p><a href="{% url 'category' category.slug %}">{{ category.name }}</a></p>
-    {% endfor %}
+    {% category_list %}
     <hr>
         <h2>{{ post.title }}</h2>
         <p>{{ post.mini_text }}</p>

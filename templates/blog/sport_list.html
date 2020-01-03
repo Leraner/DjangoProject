@@ -1,10 +1,13 @@
 <!DOCTYPE html>
+{% load blog_tags %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
 </head>
 <body>
+    {% category_list %}
+
     {% for post in posts %}
         <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
         {{ post.mini_text }}

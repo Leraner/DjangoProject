@@ -12,10 +12,9 @@ from .models import Category, Post, Comment, Tag
 class HomeView(View):
     """Вывод полной домашней страницы"""
     def get(self, request):
-        category_list = Category.objects.filter(published=True)
         # __lte - меньше или равно
         post_list = Post.objects.filter(published_date__lte=timezone.now(), published=True)
-        return render(request, 'blog/home.html', {'categories': category_list, 'posts': post_list})
+        return render(request, 'blog/home.html', {'posts': post_list})
 
 
 class CategoryView(View):
@@ -44,8 +43,6 @@ class CategoryView(View):
 class PostDetailView(View):
     """Вывод поста"""
     def get(self, request, **kwargs):
-        print(kwargs.get('post_slug'))
-        categories = Category.objects.filter(published=True)
         post = get_object_or_404(
             Post, slug=kwargs.get('post_slug'),
             published_date__lte=timezone.now(),
@@ -53,7 +50,7 @@ class PostDetailView(View):
         )
         form = CommentForm()
         return render(
-            request, post.template, {'post': post, 'categories': categories, 'form': form}
+            request, post.template, {'post': post, 'form': form}
         )
 
     def post(self, request, **kwargs):
