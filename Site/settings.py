@@ -40,9 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog.apps.BlogConfig',
-    'menu.apps.MenuConfig',
-    'pages.apps.PagesConfig',
+    'blog.apps.BlogConfig',                 # blog
+    'menu.apps.MenuConfig',                 # menu
+    'pages.apps.PagesConfig',               # pages
     'mptt',
 ]
 
@@ -55,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    'pages.middleware.PageFallbackMiddleware',                              # middleware in pages
 ]
 
 ROOT_URLCONF = 'Site.urls'

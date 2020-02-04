@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-{% load blog_tags %}
+{% load blog_tags menu_tags %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
 </head>
 <body>
+
+    {% menu_item menu="Main" %}
+
+    <hr>
+
     {% category_list %}
     <hr>
     {% for post in posts %}

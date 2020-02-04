@@ -11,6 +11,7 @@ class Menu(models.Model):
     name = models.CharField('Название', max_length=100)
     is_auth = models.BooleanField('Для зарегистрированных или нет', default=False)
     active = models.BooleanField('вкл/выкл', default=True)
+    published = models.BooleanField('Отображать?', default=True)
 
     def __str__(self):
         return self.name
@@ -42,7 +43,7 @@ class MenuItems(MPTTModel):
     status = models.BooleanField('вкл/выкл', default=False)
     is_auth = models.BooleanField('Для зарегистрированных или нет', default=False)
     anchor = models.CharField('Якорь', max_length=225, null=True, blank=True)
-    url = models.CharField('url на внешний ресурс', max_length=225)
+    url = models.CharField('url на внешний ресурс', max_length=225, null=True, blank=True)
     active = models.BooleanField('вкл/выкл', default=True)
     content_type = models.ForeignKey(
         ContentType,
@@ -74,4 +75,3 @@ class MenuItems(MPTTModel):
     class Meta:
         verbose_name = 'Пункты меню'
         verbose_name_plural = 'Пункты меню'
-

@@ -22,15 +22,23 @@ class Page(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
+        """Метод чтобы правильно выставился url"""
+        # Чтобы сделать гл.страницу
         if self.slug is None:
             self.slug = '/'
+            # Если в начале slug нет /, то мы его добавляем
         if not f'{self.slug}'.startswith('/'):
             self.slug ='/' + self.slug
+            # Если в конце slug нет /, то мы его добавляем
         if not self.slug.endswith('/'):
             self.slug += '/'
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
+        """
+        Построение правильного пути url
+        Чтобы были учтены все /, то как url написан, нет ли каких-то определённых символов, соответствует ли utf-8 и т.д
+        """
         return iri_to_uri(get_script_prefix().rstrip('/') + self.slug)
 
     class Meta:

@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-{% load blog_tags %}
+{% load blog_tags menu_tags %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
 </head>
 <body>
+
+    {% menu_item menu="Main" %}
+
+    <hr>
     {% category_list %}
 <!--    {% for_category_list order='id' as categories %}-->
 <!--    {% for category in categories %}-->
@@ -15,7 +19,7 @@
 
     {% if posts %}
         {% for post in posts %}
-            {{ post.title }}
+            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
             {{ post.mini_text }}
             <small>{{ post.published_date }}</small>
         {% endfor %}

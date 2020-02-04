@@ -3,9 +3,10 @@ from django.views.generic import ListView
 from django.http import HttpResponse
 from django.views.generic.base import View
 from django.utils import timezone
+from django.http import Http404
+
+
 from .forms import CommentForm
-
-
 from .models import Category, Post, Comment, Tag
 
 
@@ -35,8 +36,8 @@ class CategoryView(View):
         if posts.exists():
             template = posts.first().get_category_template()
         else:
-            template = 'blog/post_list.html'
-
+            # template = 'blog/post_list.html'
+            raise Http404()
         return render(request, template, {'posts': posts})
 
 
