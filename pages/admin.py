@@ -18,7 +18,7 @@ class ActionPublish(admin.ModelAdmin):
         self.message_user(request, "%s successfully marked as published." % message_bit)
 
     unpublish.short_description = "Снять с публикации"
-    unpublish.allowed_permissions = ('change',)
+    unpublish.allowed_permissions = ('change',)     # При каких правах это можно делать
 
     def publish(self, request, queryset):
         """Опубликовать"""
@@ -49,9 +49,9 @@ class PagesAdmin(ActionPublish):
     list_editable = ("published", )
     list_filter = ("published", "template")
     search_fields = ("title",)
-    prepopulated_fields = {"slug": ("title", )}
+    prepopulated_fields = {"slug": ("title", )}     # Автоматом заполняет поле slug на основе title
     form = PagesAdminForm
-    actions = ['unpublish', 'publish']
-    save_on_top = True
-    # readonly_fields = ("slug",)
+    actions = ['unpublish', 'publish']              # После регистрации здесь action's будут срабатывать!
+    save_on_top = True                              # Сохранение страницы было сверху
+    # readonly_fields = ("slug",)                   # readonly_fields - говорит о том, что это поле только для чтения
 

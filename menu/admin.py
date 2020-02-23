@@ -11,18 +11,17 @@ class MenuAdmin(admin.ModelAdmin):
     """Меню"""
     list_display = ("name", "is_auth", "published")
     list_filter = ("published",)
-    #actions = ['unpublish', 'publish']
+    # actions = ['unpublish', 'publish']
 
 
 @admin.register(MenuItems)
 class MenuItemAdmin(MPTTModelAdmin):
     """Пункты меню"""
-    #form = MenuItemAdminForm
+    # form = MenuItemAdminForm
     list_display = ("title", "name", "parent", "menu", "sort", "published")
     list_filter = ("menu", "parent", "published")
     search_fields = ("name", "parent__name", "menu__name")
     save_as = True
     list_editable = ("sort", "published")
     mptt_level_indent = 20
-    #actions = ['unpublish', 'publish']
-
+    # actions = ['unpublish', 'publish']

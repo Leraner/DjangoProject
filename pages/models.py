@@ -5,6 +5,7 @@ from django.utils.encoding import iri_to_uri
 
 class Page(models.Model):
     title = models.CharField('Название', max_length=225)
+    sub_title = models.CharField('Подзаголовок', max_length=500, blank=True, null=True)
     text = models.TextField('Текст')
     active = models.BooleanField('вкл/выкл', default=True)
     slug = models.CharField('url', max_length=100, unique=True)
