@@ -5,9 +5,6 @@ from mptt.admin import MPTTModelAdmin
 from .models import Menu, MenuItems
 # from .forms import MenuItemAdminForm
 
-# admin.site.register(Menu)
-# admin.site.register(MenuItems)
-
 
 @admin.register(Menu)
 class MenuAdmin(admin.ModelAdmin):
