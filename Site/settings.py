@@ -25,7 +25,7 @@ SECRET_KEY = 'xjudymez677^kw(dzs9svf1w@3@xi1u3=-d9h22as#fb18$y-l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'menu.apps.MenuConfig',                 # menu
     'pages.apps.PagesConfig',               # pages
     'mptt',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -128,6 +129,12 @@ SITE_ID = 1
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [STATIC_DIR, ]
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
