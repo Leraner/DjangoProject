@@ -4,6 +4,7 @@ from django.contrib.sites.models import Site
 from django.db import models
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
+from django.conf import settings
 
 
 class Menu(models.Model):
@@ -49,7 +50,7 @@ class MenuItems(MPTTModel):
         ContentType,
         verbose_name='Ссылка на',
         # Сколько будем отрображать из выпадающего списка
-        # limit_choices_to=settings.MENU_APPS,
+        limit_choices_to=settings.MENU_APPS,
         on_delete=models.CASCADE,
         null=True,
         blank=True

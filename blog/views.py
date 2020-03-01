@@ -24,7 +24,6 @@ class CategoryView(View):
         return Post.objects.filter(published_date__lte=timezone.now(), published=True)
 
     def get(self, request, category_slug=None, tag_slug=None):
-        posts = []
         if category_slug is not None:
             # __ - хотим обратиться в модель на которую завязаны
             posts = self.get_queryset().filter(category__slug=category_slug, category__published=True)
@@ -36,8 +35,8 @@ class CategoryView(View):
         if posts.exists():
             template = posts.first().get_category_template()
         else:
-            # template = 'blog/post_list.html'
-            raise Http404()
+            template = 'blog/post_list.html'
+            # raise Http404()
         return render(request, template, {'posts': posts})
 
 
@@ -64,3 +63,13 @@ class PostDetailView(View):
             form.author = request.user
             form.save()
         return redirect(request.path)
+
+# class CreateCommentView(View):
+#     def post(self, request, pk):
+#         form = CommentForm(request.POST)
+#         if form.is_valid():
+#             form = form.save(commit=False)
+#             form.post_id = pk
+#             form.author = request.user
+#             form.save()
+#         return HttpResponse(status=201)

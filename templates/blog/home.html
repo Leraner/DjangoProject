@@ -1,3 +1,70 @@
+{% extends 'base.html' %}
+{% load static menu_tags blog_tags %}
+{% block content %}
+    {#    #}
+    {#    {% menu_item menu="Main" %}#}
+    {#    <hr>#}
+    {#    {% category_list template='base/blog/categories.html' %}#}
+    <div class="main-grids">
+        <div class="top-grids">
+            {% if posts %}
+                <div class="recommended-info">
+                    <h3>Recent Videos</h3>
+                </div>
+                {% for post in posts %}
+                    <div class="col-md-4 resent-grid recommended-grid slider-top-grids">
+                        <div class="resent-grid-img recommended-grid-img">
+                            <a href="{{ post.get_absolute_url }}">
+                                {% if post.image %}
+                                    <img src="{{ post.image.url }}" alt=""/>
+                                {% endif %}
+                            </a>
+                            <div class="time">
+                                <p><span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                                    {{ post.published_date }}</p>
+                            </div>
+{#                            <div class="clck">#}
+{#                                #}
+{#                            </div>#}
+                        </div>
+                        <div class="resent-grid-info recommended-grid-info">
+                            <h3>
+                                <a href="{{ post.get_absolute_url }}" class="title title-info">
+                                    {{ post.title }}
+                                </a>
+                            </h3>
+                            <ul>
+                                <li>
+                                    <p class="mini_text">
+                                        {% if post.mini_text %}
+                                            {{ post.mini_text }}
+                                        {% endif %}
+                                    </p>
+                                </li>
+                            </ul>
+                            <ul>
+                                <li><p class="author author-info">
+                                    {% if post.author %}
+                                        <a href="#" class="author">
+                                            {{ post.author }}
+                                        </a>
+                                    {% endif %}
+                                </p></li>
+                                <li class="right-list"><pС
+                                        class="views views-info">{{ post.viewed }}</pС></li>
+                            </ul>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h2>Статей нет</h2>
+            {% endif %}
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock content %}
+
+
 <!DOCTYPE html>
 {% load blog_tags menu_tags %}
 <html lang="en">
@@ -8,7 +75,13 @@
 <body>
 
     {% menu_item menu="Main" %}
-
+    <ul>
+        {% if user.is_authenticated %}
+            <li><a href="/accounts/logout/">Выход</a></li>
+        {% else %}
+            <li><a href="/accounts/login/">Вход</a></li>
+        {% endif %}
+    </ul>
     <hr>
 
     {% category_list %}
