@@ -35,8 +35,8 @@ class CategoryView(View):
         if posts.exists():
             template = posts.first().get_category_template()
         else:
-            template = 'blog/post_list.html'
-            # raise Http404()
+            # template = 'blog/post_list.html'
+            raise Http404()
         return render(request, template, {'posts': posts})
 
 
@@ -48,6 +48,8 @@ class PostDetailView(View):
             published_date__lte=timezone.now(),
             published=True
         )
+        post.viewed += 1    # инкрементируем счётчик просмотров и обновляем поле в базе данных
+        post.save(update_fields=['viewed'])    # update_fields=['viewed']
         form = CommentForm()
         return render(
             request, post.template, {'post': post, 'form': form}

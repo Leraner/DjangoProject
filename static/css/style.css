@@ -1,4 +1,4 @@
-/*--A Design by W3layouts 
+/*--A Design by W3layouts
 Author: W3layout
 Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
@@ -11,7 +11,7 @@ body{
 }
 body a {
   transition: 0.5s all;
-  -webkit-transition: 0.5s all;																																												
+  -webkit-transition: 0.5s all;
   -o-transition: 0.5s all;
   -moz-transition: 0.5s all;
   -ms-transition: 0.5s all;
@@ -188,7 +188,7 @@ ul.cl-effect-1,ul.cl-effect-2 {
 }
 .glyphicon-film{
 	margin: 0 2em 0 0;
-    font-size: 16px !important;	
+    font-size: 16px !important;
 }
 .glyphicon-home {
 	margin: 0 2em 0 0;
@@ -806,7 +806,7 @@ color: rgba(255, 255, 255, 0.54);
 }
 select.form-control.bfh-countries:hover {
    transition: 0.5s all;
-  -webkit-transition: 0.5s all;																																												
+  -webkit-transition: 0.5s all;
   -o-transition: 0.5s all;
   -moz-transition: 0.5s all;
   -ms-transition: 0.5s all;
@@ -1079,7 +1079,7 @@ select.form-control.bfh-countries:hover {
 #myList ul{
 margin:0;
 }
-#myList li{ 
+#myList li{
 	display:none;
 	list-style-type:none;
 }
@@ -1135,7 +1135,7 @@ width:100%;
 	color: #9E9E9E;
 	margin:0;
 	line-height: 1.8em;
-}	
+}
 .load-grid a{
     font-size: 14px;
     color: #0076CC;
@@ -1285,7 +1285,7 @@ width:100%;
 }
 .single-right-grids {
   margin: 0 0 1.5em 0;
-}	
+}
 .single-right-grid-left a img{
 	width:100%;
 }
@@ -1549,7 +1549,7 @@ span.glyphicon.glyphicon-user {
 }
 .creators-bottom-grids{
 	margin: 6em 0 0 0;
-}	
+}
 .creators-bottom-grid{
 	text-align:center;
 }
