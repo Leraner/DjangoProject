@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'profiles.apps.ProfilesConfig',         # profiles
     'blog.apps.BlogConfig',                 # blog
     'menu.apps.MenuConfig',                 # menu
     'pages.apps.PagesConfig',               # pages
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     # 'allauth.socialaccount',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% load blog_tags menu_tags %}
 
 {% block content %}
@@ -47,7 +48,7 @@
                         {% if user.is_authenticated %}
                             <form action="" method="post">
                                 {% csrf_token %}
-                                {{ form.as_p }}
+                                {{ form|crispy }}
                                 <button type="submit">Отправить</button>
                             </form>
                             </form>
@@ -66,9 +67,9 @@
                 <div class="media-grids">
                     {% for comment in post.comments.all %}
                         <div class="media">
-                            <h5>{{ comment.author }}</h5>
+                            <h5><a href="{% url 'detail_profile' comment.author.profile.slug %}">{{ comment.author }}</a></h5>
                             <div class="media-left">
-                                <a href="#">
+                                <a href="{% url 'detail_profile' comment.author.profile.slug %}">
 
                                 </a>
                             </div>

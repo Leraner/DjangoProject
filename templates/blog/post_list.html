@@ -36,7 +36,7 @@
                             <ul>
                                 <li><p class="author author-info">
                                     {% if post.author %}
-                                        <a href="#" class="author">
+                                        <a href="{% url 'detail_profile' post.author.profile.slug %}" class="author">
                                             {{ post.author }}
                                         </a>
                                     {% endif %}

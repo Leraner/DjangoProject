@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load blog_tags menu_tags %}
+
+{% block content %}
+    <div class="show-top-grids">
+        <div class="col-sm-8 single-left">
+            <h1>Добро пожаловать, {{ profile.author }}! </h1>
+            <div class="clearfix"></div>
+            <div class="published">
+                <script src="jquery.min.js"></script>
+                <script>
+                    $(document).ready(function () {
+                        size_li = $("#myList li").size();
+                        x = 1;
+                        $('#myList li:lt(' + x + ')').show();
+                        $('#loadMore').click(function () {
+                            x = (x + 1 <= size_li) ? x + 1 : size_li;
+                            $('#myList li:lt(' + x + ')').show();
+                        });
+                        $('#showLess').click(function () {
+                            x = (x - 1 < 0) ? 1 : x - 1;
+                            $('#myList li').not(':lt(' + x + ')').hide();
+                        });
+                    });
+                </script>
+                <div class="load_more">
+                    <ul id="myList">
+                        <li>
+                            {% if profile.image %}
+                                <img src="{{ profile.image.url }}" width="250" height="200" alt=""/>
+                            {% endif %}
+                            <h4>{{ profile.author }}</h4>
+                            Статус : {{ profile.status }}
+                            <div class="load-grids">
+                                <div class="load-grid">
+                                    <p>Ссылка : {{ profile.slug }}</p>
+                                </div>
+                                <div class="load-grid">
+                                    <a href="{{ post.category.get_absolute_url }}">{{ post.category }}</a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-4 single-right">
+            <h3>Up Next</h3>
+            <div class="single-grid-right">
+                Information
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+{% endblock content %}
