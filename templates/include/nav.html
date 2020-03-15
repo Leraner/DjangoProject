@@ -29,7 +29,7 @@
                 {#                </div>#}
                 <div class="signin">
                     {% if not user.is_authenticated %}
-                    <a href="#small-dialog2" class="play-icon popup-with-zoom-anim">Sign Up</a>
+                    <a href="#small-dialog3" class="play-icon popup-with-zoom-anim">Sign Up</a>
                     {% endif %}
                     <!-- pop-up-box -->
                     <script type="text/javascript"
@@ -87,18 +87,30 @@
                             </div>
                         </div>
                         <div class="signup">
-                            <form>
-                                <input type="text" class="email" placeholder="Email"
-                                       required="required"
-                                       pattern="([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?"
-                                       title="Enter a valid email"/>
-                                <input type="password" placeholder="Password" required="required"
-                                       pattern=".{6,}" title="Minimum 6 characters required"
-                                       autocomplete="off"/>
-                                <input type="text" class="email" placeholder="Mobile Number"
-                                       maxlength="10" pattern="[1-9]{1}\d{9}"
-                                       title="Enter a valid mobile number"/>
-                                <input type="submit" value="Sign Up"/>
+                            <form method="POST" action="{% url 'account_signup' %}">
+                                {% csrf_token %}
+                                <p><label for="id_email">E-mail:</label> <input type="email" name="email"
+                                                                                placeholder="E-mail адрес"
+                                                                                required="" id="id_email"></p>
+                                <p><label for="id_username">Имя пользователя:</label> <input type="text"
+                                                                                             name="username"
+                                                                                             placeholder="Имя пользователя"
+                                                                                             autofocus="autofocus"
+                                                                                             minlength="4"
+                                                                                             maxlength="150"
+                                                                                             required=""
+                                                                                             id="id_username"></p>
+                                <p><label for="id_password1">Пароль:</label> <input type="password" name="password1"
+                                                                                    placeholder="Пароль" required=""
+                                                                                    id="id_password1"></p>
+                                <p><label for="id_password2">Пароль (еще раз):</label> <input type="password"
+                                                                                              name="password2"
+                                                                                              placeholder="Пароль (еще раз)"
+                                                                                              required=""
+                                                                                              id="id_password2"></p>
+
+                                <button type="submit" class="primaryAction">Регистрация »</button>
+                                </button>
                             </form>
                         </div>
                         <div class="clearfix"></div>
@@ -209,6 +221,7 @@
                     {% if not user.is_authenticated %}
                     <a href="#small-dialog" class="play-icon popup-with-zoom-anim">Sign In</a>
                         {% else %}
+                        <a href="{% url 'detail_myprofile' user.profile.slug %}">My Profile</a>
                         <a href="/accounts/logout/" class="play-icon">Logout</a>
                     {% endif %}
                     <div id="small-dialog" class="mfp-hide">

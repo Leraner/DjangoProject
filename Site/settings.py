@@ -11,12 +11,12 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from .email_data import EMAIL_HOST, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, EMAIL_PORT
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 from django.db.models import Q
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -28,7 +28,6 @@ SECRET_KEY = 'xjudymez677^kw(dzs9svf1w@3@xi1u3=-d9h22as#fb18$y-l'
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-
 
 # Application definition
 
@@ -42,10 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'profiles.apps.ProfilesConfig',         # profiles
-    'blog.apps.BlogConfig',                 # blog
-    'menu.apps.MenuConfig',                 # menu
-    'pages.apps.PagesConfig',               # pages
+    'profiles.apps.ProfilesConfig',  # profiles
+    'blog.apps.BlogConfig',  # blog
+    'menu.apps.MenuConfig',  # menu
+    'pages.apps.PagesConfig',  # pages
     'mptt',
     'ckeditor',
     'allauth',
@@ -63,7 +62,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-    'pages.middleware.PageFallbackMiddleware',                              # middleware in pages
+    'pages.middleware.PageFallbackMiddleware',  # middleware in pages
 ]
 
 ROOT_URLCONF = 'Site.urls'
@@ -86,7 +85,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Site.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
@@ -96,7 +94,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -115,7 +112,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -143,7 +139,6 @@ STATICFILES_DIRS = [STATIC_DIR, ]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
 AUTHENTICATION_BACKENDS = (
@@ -151,7 +146,7 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'             # dummy - с помощью чего будет отправ. письмо
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # dummy - с помощью чего будет отправ. письмо
 
 # Allauth
 ACCOUNT_EMAIL_REQUIRED = True
@@ -176,10 +171,17 @@ MENU_APPS = (
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-DEFAULT_FROM_EMAIL = 'email'
-EMAIL_HOST = 'smtp'
-EMAIL_HOST_USER = 'email'
-EMAIL_HOST_PASSWORD = 'pass'
-EMAIL_PORT = 587
+# DEFAULT_FROM_EMAIL = 'email'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = 'danilachuprin2004@gmail.com'
+# EMAIL_HOST_PASSWORD = '21042004dS'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_USE_SSL = False
+
+
+EMAIL_HOST = EMAIL_HOST
+EMAIL_HOST_USER = EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
+EMAIL_PORT = EMAIL_PORT
 EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False

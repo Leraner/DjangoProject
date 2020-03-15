@@ -5,7 +5,7 @@
 {% block content %}
 <div class="show-top-grids">
     <div class="col-sm-8 single-left">
-        {#<h1>Добро пожаловать, {{ profile.author }}! </h1>#}
+        <h1>Добро пожаловать, {{ profile.author }}! </h1>
         <div class="clearfix"></div>
         <div class="published">
             <script src="jquery.min.js"></script>
@@ -36,6 +36,7 @@
                             <div class="load-grid">
                                 <p>Ссылка : {{ profile.slug }}</p>
                             </div>
+                            <p>Email : {{ user.email }}</p>
                             <div class="load-grid">
                                 <a href="{{ post.category.get_absolute_url }}">{{ post.category }}</a>
                             </div>
@@ -45,6 +46,11 @@
                 </ul>
             </div>
         </div>
+        {% if user.is_authenticated %}
+        <div class="container">
+            <a class="btn btn-success" href="{% url 'update_profile' profile.slug %}">Edit Profile</a>
+        </div>
+        {% endif %}
     </div>
 </div>
 <div class="col-md-4 single-right">
