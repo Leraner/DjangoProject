@@ -3,6 +3,13 @@
 {% load blog_tags menu_tags %}
 
 {% block content %}
+<head>
+    <style>
+        .profile-img {
+            border-radius: 200px; /* Радиус скругления */
+        }
+    </style>
+</head>
 <div class="show-top-grids">
     <div class="col-sm-8 single-left">
         {#<h1>Добро пожаловать, {{ profile.author }}! </h1>#}
@@ -28,7 +35,7 @@
                 <ul id="myList">
                     <li>
                         {% if profile.image %}
-                        <img src="{{ profile.image.url }}" width="250" height="200" alt=""/>
+                        <img class="profile-img" src="{{ profile.image.url }}" width="250" height="250" alt=""/>
                         {% endif %}
                         <h4>{{ profile.author }}</h4>
                         Статус : {{ profile.status }}
