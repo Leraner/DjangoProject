@@ -60,8 +60,8 @@ def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(author=instance)  # id=instance.id
         send_mail(
-            'Subject here',
-            'Here is the message.',
+            # 'Subject here',           - title письма
+            # 'Here is the message.',   - body письма
             'danilachuprin2004@gmail.com',
             [str(User.email)],
             fail_silently=False,

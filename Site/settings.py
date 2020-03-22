@@ -41,15 +41,23 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+
     'profiles.apps.ProfilesConfig',  # profiles
     'blog.apps.BlogConfig',  # blog
     'menu.apps.MenuConfig',  # menu
     'pages.apps.PagesConfig',  # pages
+
+
     'mptt',
     'ckeditor',
+
+    # 'djoser',
     'allauth',
     'allauth.account',
     # 'allauth.socialaccount',
+    'rest_framework',
+
     'crispy_forms',
 ]
 
@@ -146,7 +154,7 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # dummy - с помощью чего будет отправ. письмо
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # dummy - с помощью чего будет отправ. письмо
 
 # Allauth
 ACCOUNT_EMAIL_REQUIRED = True
@@ -174,12 +182,12 @@ MENU_APPS = (
 # DEFAULT_FROM_EMAIL = 'email'
 # EMAIL_HOST = 'smtp.gmail.com'
 # EMAIL_HOST_USER = 'danilachuprin2004@gmail.com'
-# EMAIL_HOST_PASSWORD = '21042004dS'
+# EMAIL_HOST_PASSWORD = 'secret:D'
 # EMAIL_PORT = 587
 # EMAIL_USE_TLS = True
 # EMAIL_USE_SSL = False
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = EMAIL_HOST
 EMAIL_HOST_USER = EMAIL_HOST_USER
