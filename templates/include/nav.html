@@ -2,6 +2,11 @@
 {% load i18n %}
 {% load account %}
 
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/btn.css' %}">
+</head>
+<body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -13,7 +18,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/"><h1><img src="{% static 'images/logo123321.png' %}"
-                                                               alt=""/></h1>
+                                                      alt=""/></h1>
             </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
@@ -24,9 +29,12 @@
                 </form>
             </div>
             <div class="header-top-right">
-                {#                <div class="file">#}
-                {#                    <a href="upload.html">Upload</a>#}
-                {#                </div>#}
+                <!--                {#-->
+                <!--                <div class="file">#}-->
+                <!--&lt;!&ndash;                    {# <a href="upload.html">Upload</a>#}&ndash;&gt;-->
+                <!--&lt;!&ndash;                    {#&ndash;&gt;-->
+                <!--                </div>-->
+                <!--&lt;!&ndash;                #}&ndash;&gt;-->
                 <div class="signin">
                     {% if not user.is_authenticated %}
                     <a href="#small-dialog3" class="play-icon popup-with-zoom-anim">Sign Up</a>
@@ -220,9 +228,10 @@
                 <div class="signin">
                     {% if not user.is_authenticated %}
                     <a href="#small-dialog" class="play-icon popup-with-zoom-anim">Sign In</a>
-                        {% else %}
-                        <a href="{% url 'detail_myprofile' user.profile.slug %}">My Profile</a>
-                        <a href="/accounts/logout/" class="play-icon">Logout</a>
+                    {% else %}
+                    <a href="{% url 'create_post' %}">Create Post</a>
+                    <a href="{% url 'detail_myprofile' user.profile.slug %}">My Profile</a>
+                    <a href="/accounts/logout/" class="play-icon">Logout</a>
                     {% endif %}
                     <div id="small-dialog" class="mfp-hide">
                         <h3>Login</h3>
@@ -260,15 +269,18 @@
                                    href="/accounts/password/reset/">Забыли пароль?</a>
                                 <input class="primaryAction" type="submit" name="" value="Login">
                             </form>
-                            {#                            <form>#}
-                            {#                                <input type="text" class="email" placeholder="Enter email / mobile"#}
-                            {#                                       required="required"#}
-                            {#                                       pattern="([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?"/>#}
-                            {#                                <input type="password" placeholder="Password" required="required"#}
-                            {#                                       pattern=".{6,}" title="Minimum 6 characters required"#}
-                            {#                                       autocomplete="off"/>#}
-                            {#                                <input type="submit" value="LOGIN"/>#}
-                            {#                            </form>#}
+<!--                            {#-->
+<!--                            <form>#}-->
+<!--                                {# <input type="text" class="email" placeholder="Enter email / mobile" #}-->
+<!--                                          {# required="required" #}-->
+<!--                                          {# pattern="([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?"/>#}-->
+<!--                                {# <input type="password" placeholder="Password" required="required" #}-->
+<!--                                          {# pattern=".{6,}" title="Minimum 6 characters required" #}-->
+<!--                                          {# autocomplete="off"/>#}-->
+<!--                                {# <input type="submit" value="LOGIN"/>#}-->
+<!--                                {#-->
+                            </form>
+<!--                            #}-->
                             <div class="forgot">
                                 <a href="#">Forgot password ?</a>
                             </div>
@@ -284,3 +296,4 @@
         <div class="clearfix"></div>
     </div>
 </nav>
+</body>

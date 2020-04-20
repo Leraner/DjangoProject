@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load crispy_forms_tags %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание Тега страницы</title>
+</head>
+<body>
+<div class="container" align="center">
+    {% if user.is_authenticated %}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit">Отправить</button>
+    </form>
+    {% else %}
+    <div class="container" align="center">
+        <h1>Страница не найдена</h1>
+    </div>
+    {% endif %}
+</div>
+</body>
+</html>

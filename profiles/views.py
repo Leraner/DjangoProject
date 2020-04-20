@@ -9,36 +9,33 @@ from django.utils import timezone
 from django.http import Http404
 from django.contrib import messages
 
-from .forms import ProfileUserEditForm
+from .forms import ProfileForm
 from .models import Profile
 
 
-# class ProfileView(DetailView):
-#     model = Profile
-#     content_object_name = 'profile'
-#     template_name = 'profile/profile_detail.html'
-
-
-# def get_profile(request, profile_slug):
-#     profile = get_object_or_404(Profile, published=True, slug="/" + profile_slug + "/")
-#     return ProfileView(request, profile)
-
-# class ProfileUpdateView(UpdateView):
-#     model = Profile
-#     fields = ['status']
-#     template_name = 'profile/update_profile_form.html'
-
-
 class ProfileUpdateView(View):
-    def post(self, request, profile_slug):
-        profile_form = ProfileUserEditForm(request.POST, instance=request.user.profile)
-        if profile_form.is_valid:
-            profile_form.save()
-            return redirect('/')
-
     def get(self, request, profile_slug):
-        profile_form = ProfileUserEditForm(request.POST, instance=request.user.profile)
-        return render(request, 'profile/update_profile_form.html', {'profile_form': profile_form})
+        profile = get_object_or_404(Profile, published=True, slug=profile_slug)
+        form = ProfileForm(instance=profile)
+
+        if not request.user == profile.author:
+            if not request.user.is_authenticated:
+                raise Http404
+            else:
+                if not request.user.is_staff or not request.user.is_superuser:
+                    raise Http404
+                else:
+                    return render(request, 'profile/update_profile_form.html', {'profile': profile, 'form': form})
+        else:
+            return render(request, 'profile/update_profile_form.html', {'profile': profile, 'form': form})
+
+    def post(self, request, **kwargs):
+        profile = get_object_or_404(Profile, published=True, slug=kwargs.get('profile_slug'))
+        form = ProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+            # return redirect(reverse_lazy('detail_myprofile', form.slug))
 
 
 class MyProfileDetailView(View):

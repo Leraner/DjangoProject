@@ -14,12 +14,3 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = ('author', 'status', 'image', 'slug',)
 
-
-class ProfileUserEditForm(forms.ModelForm):
-    """Класс формы изменение данных пользователя"""
-
-    class Meta:
-        model = Profile
-        fields = (
-            'status',
-        )

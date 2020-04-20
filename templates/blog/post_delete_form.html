@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Удаление поста</title>
+</head>
+<body>
+{% if user == request.user %}
+<form action="{% url 'delete_post' category=post.category.slug post_slug=post.slug %}" method="post">
+    {% csrf_token %}
+
+    <h1>Вы уверены что хотите удалить пост?</h1>
+    <a href="/">Нет</a>
+    <button type="submit">Да</button>
+
+</form>
+{% endif %}
+</body>
+</html>

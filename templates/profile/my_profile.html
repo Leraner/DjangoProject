@@ -8,6 +8,9 @@
         .profile-img {
             border-radius: 200px; /* Радиус скругления */
         }
+        .show-top-grids {
+            margin-top: 3%; /* Отступ сверху */
+        }
     </style>
 </head>
 <div class="show-top-grids">
@@ -54,8 +57,11 @@
             </div>
         </div>
         {% if user.is_authenticated %}
+
         <div class="container">
-            <a class="btn btn-success" href="{% url 'update_profile' profile.slug %}">Edit Profile</a>
+            <form action="{% url 'update_profile' profile.slug %}">
+                <button class="btn btn1">Edit profile</button>
+            </form>
         </div>
         {% endif %}
     </div>

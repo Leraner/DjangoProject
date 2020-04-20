@@ -103,6 +103,9 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('detail_post', kwargs={'category': self.category.slug, 'post_slug': self.slug})
 
+    def get_delete_url(self):
+        return reverse('detail_post', kwargs={'category': self.category.slug, 'post_slug': self.slug})
+
     def get_comments_count(self):
         return self.comments.count()
 

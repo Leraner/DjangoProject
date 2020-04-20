@@ -1,9 +1,12 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
 {% load crispy_forms_tags %}
-
-{% block content %}
-
-<div class="container">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование поста</title>
+</head>
+<body>
+<div class="container" align="center">
     <form method="post">
         {% csrf_token %}
         {{ form|crispy }}
@@ -11,6 +14,5 @@
         <button class="btn btn4" type="submit">Update profile</button>
     </form>
 </div>
-
-
-{% endblock %}
+</body>
+</html>
