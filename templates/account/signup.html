@@ -1,23 +1,61 @@
-{% extends "account/base.html" %}
-
 {% load crispy_forms_tags %}
-
+{% load static %}
 {% load i18n %}
 
-{% block head_title %}{% trans "Signup" %}{% endblock %}
 
-{% block content %}
-<h1>{% trans "Sign Up" %}</h1>
+<head>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+</head>
+<body>
 
-<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
-
-<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-  {% csrf_token %}
-  {{ form|crispy }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <button type="submit">{% trans "Sign Up" %} &raquo;</button>
+<form class="login-form" id="signup_form" method="post" action="{% url 'account_signup' %}">
+    <h1>{% trans "Sign Up" %}</h1>
+    {% csrf_token %}
+    <div class="txtb">
+        <input type="email" name="email"
+               required="" id="id_email">
+        <span data-placeholder="Email"></span>
+    </div>
+    <div class="txtb">
+        <input type="text"
+               name="username"
+               autofocus="autofocus"
+               minlength="4"
+               maxlength="150"
+               required=""
+               id="id_username">
+        <span data-placeholder="Username"></span>
+    </div>
+    <div class="txtb">
+        <input type="password" name="password1"
+               required=""
+               id="id_password1">
+        <span data-placeholder="Password"></span>
+    </div>
+    <div class="txtb">
+        <input type="password"
+               name="password2"
+               required=""
+               id="id_password2">
+        <span data-placeholder="Password replay"></span>
+    </div>
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+    {% endif %}
+    <button class="logbtn" type="submit">{% trans "Sign Up" %} &raquo;</button>
+    <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}
+    </p>
 </form>
+<script type="text/javascript">
+    $(".txtb input").on("focus", function () {
+        $(this).addClass("focus");
+    });
 
-{% endblock %}
+    $(".txtb input").on("blur", function () {
+        if ($(this).val() == "")
+            $(this).removeClass("focus");
+    });
+
+</script>
+</body>

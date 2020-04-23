@@ -14,10 +14,12 @@ from .models import Profile
 
 
 class ProfileUpdateView(View):
+    """Редактирование профиля"""
     def get(self, request, profile_slug):
         profile = get_object_or_404(Profile, published=True, slug=profile_slug)
         form = ProfileForm(instance=profile)
 
+        # Проверка пользователя, request.user == profile.author, супер юзер, персонал или нет
         if not request.user == profile.author:
             if not request.user.is_authenticated:
                 raise Http404
@@ -31,7 +33,7 @@ class ProfileUpdateView(View):
 
     def post(self, request, **kwargs):
         profile = get_object_or_404(Profile, published=True, slug=kwargs.get('profile_slug'))
-        form = ProfileForm(request.POST, instance=profile)
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
             return redirect('/')
@@ -39,12 +41,21 @@ class ProfileUpdateView(View):
 
 
 class MyProfileDetailView(View):
+    """Отображение страницы котору можно редактировать"""
     def get(self, request, profile_slug):
         profile = get_object_or_404(Profile, published=True, slug=profile_slug)
         return render(request, 'profile/my_profile.html', {'profile': profile})
 
 
 class ProfileDetailView(View):
+    """Отображение страницы котору нельзя редактировать"""
     def get(self, request, profile_slug):
         profile = get_object_or_404(Profile, published=True, slug=profile_slug)
-        return render(request, 'profile/profile_detail.html', {'profile': profile})
+
+        if not request.user == profile.author:
+            if not request.user.is_staff or not request.user.is_superuser:
+                return render(request, 'profile/profile_detail.html', {'profile': profile})
+            else:
+                return render(request, 'profile/my_profile.html', {'profile': profile})
+        else:
+            return render(request, 'profile/my_profile.html', {'profile': profile})

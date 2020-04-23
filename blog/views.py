@@ -53,7 +53,10 @@ class PostCreateView(View):
         return render(request, 'blog/create_post.html', {'form': form})
 
     def post(self, request):
-        form = PostForm(request.POST)
+        # request.files нужен для того, чтобы отображалась картинка поста
+        # Django работает с файлами post
+        # Также нужно прописать в форме(в шаблоне) enctype="multipart/form-data"
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             form = form.save(commit=False)
             form.author = request.user
@@ -123,7 +126,7 @@ class PostEditView(View):
             published_date__lte=timezone.now(),
             published=True
         )
-        form = PostForm(request.POST, instance=post)
+        form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             form.save()
             return redirect('/')

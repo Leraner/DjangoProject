@@ -59,13 +59,13 @@ def create_user_profile(sender, instance, created, **kwargs):
     """Создание профиля пользователя при регистрации"""
     if created:
         Profile.objects.create(author=instance)  # id=instance.id
-        send_mail(
-            # 'Subject here',           - title письма
-            # 'Here is the message.',   - body письма
-            'danilachuprin2004@gmail.com',
-            [str(User.email)],
-            fail_silently=False,
-        )
+        # send_mail(
+        #     # 'Subject here',           - title письма
+        #     # 'Here is the message.',   - body письма
+        #     'danilachuprin2004@gmail.com',
+        #     [str(User.email)],
+        #     fail_silently=False,
+        # )
 
 
 @receiver
