@@ -44,6 +44,11 @@ class MyProfileDetailView(View):
     """Отображение страницы котору можно редактировать"""
     def get(self, request, profile_slug):
         profile = get_object_or_404(Profile, published=True, slug=profile_slug)
+
+        # profile.active = True
+        # profile.save(update_fields=['active'])
+        # :TODO Сделать онлайн пользователя
+
         return render(request, 'profile/my_profile.html', {'profile': profile})
 
 
@@ -51,6 +56,10 @@ class ProfileDetailView(View):
     """Отображение страницы котору нельзя редактировать"""
     def get(self, request, profile_slug):
         profile = get_object_or_404(Profile, published=True, slug=profile_slug)
+
+        # profile.active = True
+        # profile.save(update_fields=['active'])
+        # :TODO Сделать онлайн пользователя
 
         if not request.user == profile.author:
             if not request.user.is_staff or not request.user.is_superuser:

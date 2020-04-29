@@ -16,7 +16,7 @@ class HomeView(View):
     def get(self, request):
         # __lte - меньше или равно
         post_list = Post.objects.filter(published_date__lte=timezone.now(), published=True)
-        return render(request, 'blog/home.html', {'posts': post_list})
+        return render(request, 'blog/post_list.html', {'posts': post_list})
 
 
 class CategoryView(View):

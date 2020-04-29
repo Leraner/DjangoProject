@@ -17,6 +17,7 @@ class Profile(models.Model):
         blank=False,
     )
     status = models.CharField('Статус', max_length=100, null=True, blank=True)
+    active = models.BooleanField('Активный', default=False)
     image = models.ImageField('Главная фотография', upload_to='users/', null=True, blank=True)
     published = models.BooleanField('Отображать?', default=True)
     slug = models.CharField(
@@ -42,6 +43,7 @@ class Profile(models.Model):
     #     if not self.slug.endswith('/'):
     #         self.slug += '/'
     #     super().save(*args, **kwargs)
+    # :TODO Сделать проверку на online пользователя
 
     def __str__(self):
         return str(self.author)

@@ -1,77 +1,54 @@
-{% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% load blog_tags menu_tags %}
+{% load static %}
 
-{% block content %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 <head>
-    <style>
-        .profile-img {
-            border-radius: 200px; /* Радиус скругления */
-        }
-        .show-top-grids {
-            margin-top: 3%; /* Отступ сверху */
-        }
-    </style>
+    <meta charset="utf-8">
+    <title>Profile {{ profile.author }}</title>
+    <script src="{% static 'js/parallax.js' %}"></script>
+    <link rel="shortcut icon" href="{% static '/images/favicon/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
 </head>
-<div class="show-top-grids">
-    <div class="col-sm-8 single-left">
-        <h1>Добро пожаловать, {{ profile.author }}! </h1>
-        <div class="clearfix"></div>
-        <div class="published">
-            <script src="jquery.min.js"></script>
-            <script>
-                $(document).ready(function () {
-                    size_li = $("#myList li").size();
-                    x = 1;
-                    $('#myList li:lt(' + x + ')').show();
-                    $('#loadMore').click(function () {
-                        x = (x + 1 <= size_li) ? x + 1 : size_li;
-                        $('#myList li:lt(' + x + ')').show();
-                    });
-                    $('#showLess').click(function () {
-                        x = (x - 1 < 0) ? 1 : x - 1;
-                        $('#myList li').not(':lt(' + x + ')').hide();
-                    });
-                });
-            </script>
-            <div class="load_more">
-                <ul id="myList">
-                    <li>
-                        {% if profile.image %}
-                        <img class="profile-img" src="{{ profile.image.url }}" width="200" height="200" alt=""/>
-                        {% endif %}
-                        <h4>{{ profile.author }}</h4>
-                        Статус : {{ profile.status }}
-                        <div class="load-grids">
-                            <div class="load-grid">
-                                <p>Ссылка : {{ profile.slug }}</p>
-                            </div>
-                            <p>Email : {{ user.email }}</p>
-                            <div class="load-grid">
-                                <a href="{{ post.category.get_absolute_url }}">{{ post.category }}</a>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </li>
-                </ul>
+<body>
+<div class="profile-card">
+    <div class="top-section">
+        <a href="#"><i class="message fas fa-envelope"></i></a>
+        <a href="/"><i class="notif fas fa-arrow-left"></i></a>
+        {% if profile.image %}
+            {% if profile.active %}
+                <div class="pic">
+                    <img class="profile-img" src="{{ profile.image.url }}" alt=""/>
+                </div>
+            {% else %}
+                <div class="offline-pic">
+                    <img class="profile-img" src="{{ profile.image.url }}" alt=""/>
+                </div>
+            {% endif %}
+        {% else %}
+            <div class="pic">
+                <img class="profile-img" src="{% static 'images/profile/unknown.jpg' %}" alt=""/>
             </div>
-        </div>
-        {% if user.is_authenticated %}
-
-        <div class="container">
-            <form action="{% url 'update_profile' profile.slug %}">
-                <button class="btn btn1">Edit profile</button>
-            </form>
-        </div>
         {% endif %}
+        <div class="name">{{ profile.author }}</div>
+        <div class="tag">{{ profile.author.email }}</div>
+    </div>
+
+    <div class="bottom-section">
+        <div class="social-media">
+            <a href="{% url 'update_profile' profile.slug %}"><i class="fab fa-edit"></i></a>
+{#            <a href="#"><i class="fab fa-record-vinyl"></i></a>#}
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fas fa-link"></i></a>
+        </div>
+
+        <div class="border"></div>
+        <div class="subscribers">204K <span>Subscribers</span></div>
+        <div class="border"></div>
+        <div class="views">{{ profile.status }} <span>Status</span></div>
     </div>
 </div>
-<div class="col-md-4 single-right">
-    <h3>Up Next</h3>
-    <div class="single-grid-right">
-        Information
-    </div>
-</div>
-<div class="clearfix"></div>
-</div>
-{% endblock content %}
+</body>
+</html>
