@@ -1,3 +1,4 @@
+from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.core.mail import send_mail
 from django.db import models
 from django.contrib.auth.models import User
@@ -5,6 +6,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from django.core.cache import cache
 import random
 
 
@@ -17,8 +19,14 @@ class Profile(models.Model):
         blank=False,
     )
     status = models.CharField('Статус', max_length=100, null=True, blank=True)
-    active = models.BooleanField('Активный', default=False)
-    image = models.ImageField('Главная фотография', upload_to='users/', null=True, blank=True)
+    is_online = models.BooleanField(default=False)
+    image = models.ImageField(
+        'Главная фотография',
+        upload_to='users/',
+        null=True,
+        blank=True,
+        default='../static/images/profile/unknown.jpg'
+    )
     published = models.BooleanField('Отображать?', default=True)
     slug = models.CharField(
         'url',
@@ -43,7 +51,6 @@ class Profile(models.Model):
     #     if not self.slug.endswith('/'):
     #         self.slug += '/'
     #     super().save(*args, **kwargs)
-    # :TODO Сделать проверку на online пользователя
 
     def __str__(self):
         return str(self.author)

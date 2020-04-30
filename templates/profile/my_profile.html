@@ -18,28 +18,26 @@
         <a href="#"><i class="message fas fa-envelope"></i></a>
         <a href="/"><i class="notif fas fa-arrow-left"></i></a>
         {% if profile.image %}
-            {% if profile.active %}
+            {% if profile.is_online %}
+                Online
                 <div class="pic">
                     <img class="profile-img" src="{{ profile.image.url }}" alt=""/>
                 </div>
             {% else %}
-                <div class="offline-pic">
-                    <img class="profile-img" src="{{ profile.image.url }}" alt=""/>
+                Offline
+                <div class="profile-pic">
+                    <img class="offline-pic" src="{{ profile.image.url }}" alt=""/>
                 </div>
             {% endif %}
-        {% else %}
-            <div class="pic">
-                <img class="profile-img" src="{% static 'images/profile/unknown.jpg' %}" alt=""/>
-            </div>
         {% endif %}
         <div class="name">{{ profile.author }}</div>
-        <div class="tag">{{ profile.author.email }}</div>
+        <div class="tag">{{ profile.last_online }}</div>
     </div>
 
     <div class="bottom-section">
         <div class="social-media">
             <a href="{% url 'update_profile' profile.slug %}"><i class="fab fa-edit"></i></a>
-{#            <a href="#"><i class="fab fa-record-vinyl"></i></a>#}
+            {# <a href="#"><i class="fab fa-record-vinyl"></i></a>#}
             <a href="#"><i class="fab fa-instagram"></i></a>
             <a href="#"><i class="fas fa-link"></i></a>
         </div>

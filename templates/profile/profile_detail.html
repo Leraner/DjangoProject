@@ -18,9 +18,17 @@
         <a href="#"><i class="message fas fa-envelope"></i></a>
         <a href="/"><i class="notif fas fa-arrow-left"></i></a>
         {% if profile.image %}
-            <div class="pic">
-                <img class="profile-img" src="{{ profile.image.url }}" alt=""/>
-            </div>
+            {% if profile.is_online %}
+                Online
+                <div class="pic">
+                    <img class="profile-img" src="{{ profile.image.url }}" alt=""/>
+                </div>
+            {% else %}
+                Offline
+                <div class="profile-pic">
+                    <img class="offline-pic" src="{{ profile.image.url }}" alt=""/>
+                </div>
+            {% endif %}
         {% endif %}
         <div class="name">{{ profile.author }}</div>
         <div class="tag">{{ profile.author.email }}</div>

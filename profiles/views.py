@@ -7,6 +7,8 @@ from django.views.generic.edit import UpdateView
 from django.views.generic import DetailView
 from django.utils import timezone
 from django.http import Http404
+from django.contrib.auth.signals import user_logged_in, user_logged_out
+from django.dispatch import receiver
 from django.contrib import messages
 
 from .forms import ProfileForm
@@ -45,10 +47,6 @@ class MyProfileDetailView(View):
     def get(self, request, profile_slug):
         profile = get_object_or_404(Profile, published=True, slug=profile_slug)
 
-        # profile.active = True
-        # profile.save(update_fields=['active'])
-        # :TODO Сделать онлайн пользователя
-
         return render(request, 'profile/my_profile.html', {'profile': profile})
 
 
@@ -57,10 +55,6 @@ class ProfileDetailView(View):
     def get(self, request, profile_slug):
         profile = get_object_or_404(Profile, published=True, slug=profile_slug)
 
-        # profile.active = True
-        # profile.save(update_fields=['active'])
-        # :TODO Сделать онлайн пользователя
-
         if not request.user == profile.author:
             if not request.user.is_staff or not request.user.is_superuser:
                 return render(request, 'profile/profile_detail.html', {'profile': profile})
@@ -68,3 +62,17 @@ class ProfileDetailView(View):
                 return render(request, 'profile/my_profile.html', {'profile': profile})
         else:
             return render(request, 'profile/my_profile.html', {'profile': profile})
+
+
+@receiver(user_logged_in)
+def got_online(sender, user, request, **kwargs):
+    request.user.profile.is_online = True
+    print(request.user.profile)
+    user.profile.save()
+
+
+@receiver(user_logged_out)
+def got_offline(sender, user, request, **kwargs):
+    request.user.profile.is_online = False
+    print(request.user.profile)
+    user.profile.save()
