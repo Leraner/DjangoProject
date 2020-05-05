@@ -24,6 +24,7 @@
 .navlist {
     flex: 1;
     display: flex;
+    font-size: 13px;
 }
 
 .navlist a {

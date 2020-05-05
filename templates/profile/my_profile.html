@@ -10,9 +10,15 @@
     <script src="{% static 'js/parallax.js' %}"></script>
     <link rel="shortcut icon" href="{% static '/images/favicon/favicon.ico' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/loader.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
 </head>
 <body>
+
+<div class="loader">
+    <img src="{% static '/images/loader/loading.gif' %}" alt="Loading..." />
+</div>
+
 <div class="profile-card">
     <div class="top-section">
         <a href="#"><i class="message fas fa-envelope"></i></a>
@@ -49,4 +55,10 @@
     </div>
 </div>
 </body>
+<script>
+    window.addEventListener("load", function () {
+        const loader = document.querySelector(".loader");
+        loader.className += " hidden"; // class "loader hidden"
+    });
+</script>
 </html>

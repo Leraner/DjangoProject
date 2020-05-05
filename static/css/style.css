@@ -10,13 +10,13 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
-body a {
-    transition: 0.5s all;
-    -webkit-transition: 0.5s all;
-    -o-transition: 0.5s all;
-    -moz-transition: 0.5s all;
-    -ms-transition: 0.5s all;
-}
+/*body a {*/
+/*    transition: 0.5s all;*/
+/*    -webkit-transition: 0.5s all;*/
+/*    -o-transition: 0.5s all;*/
+/*    -moz-transition: 0.5s all;*/
+/*    -ms-transition: 0.5s all;*/
+/*}*/
 
 a.navbar-brand {
     padding: 0 0 0 1em;

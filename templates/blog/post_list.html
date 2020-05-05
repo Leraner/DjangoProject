@@ -3,44 +3,46 @@
 {% load static menu_tags blog_tags %}
 
 {% block content %}
-    <head>
-        <title>Cards</title>
-        <link rel="stylesheet" href="{% static 'css/post_list.css' %}">
-        <link rel="stylesheet" href="{% static 'css/neon_btns.css' %}">
-    </head>
-    <body>
-    {% if posts %}
-        <div class="main">
-            {% for post in posts %}
-                <!--cards -->
+<head>
+    <title>Cards</title>
+    <link rel="stylesheet" href="{% static 'css/post_list.css' %}">
+    <link rel="stylesheet" href="{% static 'css/neon_btns.css' %}">
+</head>
+<body>
+{% if posts %}
+<div class="main">
+    {% for post in posts %}
+    <!--cards -->
 
-                <div class="card">
-                    {% if post.image %}
-                        <div class="image">
-                            <a href="{{ post.get_absolute_url }}"><img src="{{ post.image.url }}" width="200"
-                                                                       height="300" alt=""/></a>
-                        </div>
-                    {% endif %}
-                    <div class="title">
-                        <h1>
-                            {{ post.title }}</h1>
-                    </div>
-                    <div class="des">
-                        {% if post.mini_text %}
-                            <p>{{ post.mini_text }}</p>
-                        {% endif %}
-                        <a href="{{ post.get_absolute_url }}">Read more...</a>
-                    </div>
-                    <div class="author">
-                        {% if post.author %}
-                            <p><a href="{% url 'detail_profile' post.author.profile.slug %}"
-                                  class="author">{{ post.author }}</a></p>
-                        {% endif %}
-                    </div>
-                </div>
-                <!--cards -->
-            {% endfor %}
+    <div class="card">
+        {% if post.image %}
+        <div class="image">
+            <a href="{{ post.get_absolute_url }}">
+                <img src="{{ post.image.url }}" width="200"
+                     height="300" alt=""/>
+            </a>
         </div>
-    {% endif %}
-    </body>
+        {% endif %}
+        <div class="title">
+            <h1>
+                {{ post.title }}</h1>
+        </div>
+        <div class="des">
+            {% if post.mini_text %}
+            <p>{{ post.mini_text }}</p>
+            {% endif %}
+            <a href="{{ post.get_absolute_url }}">Read more...</a>
+        </div>
+        <div class="author">
+            {% if post.author %}
+            <p><a href="{% url 'detail_profile' post.author.profile.slug %}"
+                  class="author">{{ post.author }}</a></p>
+            {% endif %}
+        </div>
+    </div>
+    <!--cards -->
+    {% endfor %}
+</div>
+{% endif %}
+</body>
 {% endblock content %}

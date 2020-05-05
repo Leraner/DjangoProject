@@ -67,12 +67,10 @@ class ProfileDetailView(View):
 @receiver(user_logged_in)
 def got_online(sender, user, request, **kwargs):
     request.user.profile.is_online = True
-    print(request.user.profile)
     user.profile.save()
 
 
 @receiver(user_logged_out)
 def got_offline(sender, user, request, **kwargs):
     request.user.profile.is_online = False
-    print(request.user.profile)
     user.profile.save()

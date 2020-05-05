@@ -9,26 +9,33 @@
     <title>Profile {{ profile.author }}</title>
     <link rel="shortcut icon" href="{% static '/images/favicon/favicon.ico' %}" type="image/x-icon">
     <script src="{% static 'js/parallax.js' %}"></script>
+    <script src="{% static 'js/loader.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/loader.css' %}">
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
 </head>
 <body>
+
+<div class="loader">
+    <img src="{% static '/images/loader/loading.gif' %}" alt="Loading..." />
+</div>
+
 <div class="profile-card">
     <div class="top-section">
         <a href="#"><i class="message fas fa-envelope"></i></a>
         <a href="/"><i class="notif fas fa-arrow-left"></i></a>
         {% if profile.image %}
-            {% if profile.is_online %}
-                Online
-                <div class="pic">
-                    <img class="profile-img" src="{{ profile.image.url }}" alt=""/>
-                </div>
-            {% else %}
-                Offline
-                <div class="profile-pic">
-                    <img class="offline-pic" src="{{ profile.image.url }}" alt=""/>
-                </div>
-            {% endif %}
+        {% if profile.is_online %}
+        Online
+        <div class="pic">
+            <img class="profile-img" src="{{ profile.image.url }}" alt=""/>
+        </div>
+        {% else %}
+        Offline
+        <div class="profile-pic">
+            <img class="offline-pic" src="{{ profile.image.url }}" alt=""/>
+        </div>
+        {% endif %}
         {% endif %}
         <div class="name">{{ profile.author }}</div>
         <div class="tag">{{ profile.author.email }}</div>
@@ -48,4 +55,10 @@
     </div>
 </div>
 </body>
+<!--<script type="text/javascript">-->
+<!--    window.addEventListener("load", function () {-->
+<!--        const loader = document.querySelector(".loader");-->
+<!--        loader.className += " hidden"; // class "loader hidden"-->
+<!--    });-->
+<!--</script>-->
 </html>
