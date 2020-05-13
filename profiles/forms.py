@@ -12,5 +12,22 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ('author', 'status', 'image', 'slug',)
+        fields = ('status', 'image', 'slug',)
+        widgets = {
+            'status': forms.TextInput(attrs={
+                'placeholder': 'Status',
+                'class': 'form-control',
+                'id': 'status',
+            }),
+            'image': forms.FileInput(attrs={
+                'placeholder': 'Title',
+                'class': 'form-control',
+                'id': 'image',
+            }),
+            'slug': forms.TextInput(attrs={
+                'placeholder': 'Slug',
+                'class': 'form-control',
+                'id': 'slug',
+            }),
+        }
 

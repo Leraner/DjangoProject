@@ -50,6 +50,7 @@
                                 {% if user == post.author %}
                                     {% if user.is_staff or user.is_superuser %}
                                         <a href="delete">Delete</a>
+                                        <a href="edit">Edit</a>
                                     {% endif %}
                                 {% endif %}
                             {% endif %}

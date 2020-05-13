@@ -17,14 +17,14 @@ body {
     width: 20%;
     display: inline-block;
     box-shadow: 1px 1px 5px rgba(190, 62, 201, .4);
-    border-radius: 5px;
+    border-radius: 20px;
     margin: 2%;
 }
 
 .image img {
     width: 100%;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
 
 
 }

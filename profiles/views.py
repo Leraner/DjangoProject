@@ -1,7 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView
-from django.http import HttpResponse
 from django.views.generic.base import View
 from django.views.generic.edit import UpdateView
 from django.views.generic import DetailView
@@ -9,7 +7,7 @@ from django.utils import timezone
 from django.http import Http404
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.dispatch import receiver
-from django.contrib import messages
+
 
 from .forms import ProfileForm
 from .models import Profile
