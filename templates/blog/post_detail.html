@@ -8,6 +8,7 @@
         .account-img {
             border-radius: 100px; /* Радиус скругления */
         }
+
         .show-top-grids {
             margin-top: 3%; /* Отступ сверху */
         }
@@ -45,6 +46,13 @@
                             <div class="load-grid">
                                 <a href="{{ post.category.get_absolute_url }}">{{ post.category }}</a>
                             </div>
+                            {% if user.is_authenticated %}
+                                {% if user == post.author %}
+                                    {% if user.is_staff or user.is_superuser %}
+                                        <a href="delete">Delete</a>
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
                             <div class="clearfix"></div>
                         </div>
                     </li>

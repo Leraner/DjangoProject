@@ -16,7 +16,7 @@ body {
 .card {
     width: 20%;
     display: inline-block;
-    box-shadow: 2px 2px 20px rgba(190, 62, 201, .4);
+    box-shadow: 1px 1px 5px rgba(190, 62, 201, .4);
     border-radius: 5px;
     margin: 2%;
 }

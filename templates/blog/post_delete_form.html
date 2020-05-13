@@ -1,19 +1,38 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Удаление поста</title>
+    <title>Удаление поста {{ post.title }}</title>
+    <script src="{% static 'js/loader.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/neon_btns.css' %}">
+    <link rel="stylesheet" href="{% static 'css/loader.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+    <style>
+        body {
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        .delete_form {
+            margin: 20%;
+        }
+    </style>
 </head>
 <body>
-{% if user == request.user %}
-<form action="{% url 'delete_post' category=post.category.slug post_slug=post.slug %}" method="post">
-    {% csrf_token %}
+<div class="delete_form" align="center">
+    <a href="/"><i class="notif fas fa-arrow-left"></i></a>
+    {% if user == request.user %}
+    <form action="{% url 'delete_post' category=post.category.slug post_slug=post.slug %}" method="post">
+        {% csrf_token %}
 
-    <h1>Вы уверены что хотите удалить пост?</h1>
-    <a href="/">Нет</a>
-    <button type="submit">Да</button>
+        <h1>Вы уверены что хотите удалить пост?</h1>
+        <div class="des">
+            <a href="/">Нет</a>
+            <button type="submit">Да</button>
+        </div>
 
-</form>
-{% endif %}
+    </form>
+    {% endif %}
+</div>
 </body>
 </html>

@@ -1,15 +1,29 @@
-{% extends "account/base.html" %}
 {% load static %}
 {% load i18n %}
 
-{% block head_title %}{% trans "Sign Out" %}{% endblock %}
 
-{% block content %}
+<html>
 <head>
+    <title>{% trans "Sign Out" %}</title>
     <link rel="shortcut icon" href="{% static '/images/favicon/favicon.ico' %}" type="image/x-icon">
+    <script src="{% static 'js/loader.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/neon_btns.css' %}">
+    <link rel="stylesheet" href="{% static 'css/loader.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+    <style>
+        body {
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        .wrapper {
+            margin: 20%;
+
+        }
+    </style>
 </head>
 <body>
-<div class="container">
+<div class="wrapper" align="center">
+    <a href="/"><i class="notif fas fa-arrow-left"></i></a>
     <h1>{% trans "Sign Out" %}</h1>
 
     <p>{% trans 'Are you sure you want to sign out?' %}</p>
@@ -19,8 +33,10 @@
         {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
         {% endif %}
-        <button type="submit">{% trans 'Sign Out' %}</button>
+        <div class="des">
+            <button type="submit">{% trans 'Sign Out' %}</button>
+        </div>
     </form>
 </div>
 </body>
-{% endblock %}
+</html>
