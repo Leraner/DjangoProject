@@ -1,2 +1,2 @@
-# DjangoProject
-DjangoProject
+# UNIC
+Unic
