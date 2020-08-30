@@ -25,9 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'xjudymez677^kw(dzs9svf1w@3@xi1u3=-d9h22as#fb18$y-l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -42,12 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-
     'profiles.apps.ProfilesConfig',  # profiles
     'blog.apps.BlogConfig',  # blog
     'menu.apps.MenuConfig',  # menu
     'pages.apps.PagesConfig',  # pages
-
 
     'mptt',
     'ckeditor',
@@ -154,8 +150,7 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # dummy - с помощью чего будет отправ. письмо
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # dummy - с помощью чего будет отправ. письма
 
 # Allauth
 ACCOUNT_EMAIL_REQUIRED = True
@@ -175,7 +170,10 @@ ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/'
 MENU_APPS = (
         Q(app_label='pages', model='page') |
         Q(app_label='blog', model='post') |
-        Q(app_label='blog', model='category')
+        Q(app_label='blog', model='category') |
+        Q(app_label='blog', model='tag') |
+        Q(app_label='blog', model='comment') |
+        Q(app_label='profiles', model='profile')
 )
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -188,12 +186,8 @@ MENU_APPS = (
 # EMAIL_USE_TLS = True
 # EMAIL_USE_SSL = False
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-EMAIL_HOST = EMAIL_HOST
-EMAIL_HOST_USER = EMAIL_HOST_USER
-EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
-EMAIL_PORT = EMAIL_PORT
-EMAIL_USE_TLS = True
-SERVER_EMAIL = EMAIL_HOST_USER
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+try:
+    from .local_settings import *
+except:
+    from .prod_settings import *

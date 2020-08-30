@@ -11,6 +11,8 @@ import random
 
 
 class Profile(models.Model):
+    """Модель профиля пользователя"""
+    status = models.CharField('Статус', max_length=100, null=True, blank=True)
     author = models.OneToOneField(
         User,
         verbose_name='Автор',
@@ -18,7 +20,6 @@ class Profile(models.Model):
         null=False,
         blank=False,
     )
-    status = models.CharField('Статус', max_length=100, null=True, blank=True)
     is_online = models.BooleanField(default=False)
     image = models.ImageField(
         'Главная фотография',
@@ -68,13 +69,14 @@ def create_user_profile(sender, instance, created, **kwargs):
     """Создание профиля пользователя при регистрации"""
     if created:
         Profile.objects.create(author=instance)  # id=instance.id
-        # send_mail(
-        #     # 'Subject here',           - title письма
-        #     # 'Here is the message.',   - body письма
-        #     'danilachuprin2004@gmail.com',
-        #     [str(User.email)],
-        #     fail_silently=False,
-        # )
+        # Отправка почты после регистрации пользователя
+        send_mail(
+            # 'Subject here',           - title письма
+            # 'Here is the message.',   - body письма
+            'danilachuprin2004@gmail.com',
+            [str(User.email)],
+            fail_silently=False,
+        )
 
 
 @receiver
